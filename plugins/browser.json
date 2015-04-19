@@ -1,0 +1,36 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"browser-package\" value=\"Device\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "org.apache.cordova.vibration": {
+            "PACKAGE_NAME": "com.example.hello"
+        }
+    },
+    "dependent_plugins": {
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.example.hello"
+        }
+    }
+}
