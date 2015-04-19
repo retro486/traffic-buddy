@@ -1,3 +1,3 @@
-www/.sass-cache
+.sass-cache
 *.swp
-
+www/css/*.map
