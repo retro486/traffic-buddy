@@ -20,18 +20,25 @@ body {
 .app {
   .clear { clear: both; }
 
-  #map {
+  #map-container {
     position: absolute;
     top: 15%;
     bottom: 15%;
     left: 5%;
     right: 5%;
+    text-align: center;
     //
     // // Elevate to GPU
     // -webkit-transform: translateZ(0);
     // -moz-transform: translateZ(0);
     // -ms-transform: translateZ(0);
     // transform: translateZ(0);
+
+    #map {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
