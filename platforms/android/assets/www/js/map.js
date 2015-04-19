@@ -1,5 +1,9 @@
 var Map = {
   apiKey: 'AlOZRqEsj0I5xiQrAM-KFXr1zQEL43FnN8EA5JpsmkltmLP4VH5eXVg15dsDCfr7',
+  settings: {
+    severities: [2,3,4],
+    defaultOrigin: [39.443256,-98.957336],
+  },
   runUserFn: function(fn) {
     if(fn !== undefined && typeof(fn) === 'function') {
       return fn();
@@ -24,15 +28,20 @@ var Map = {
     // Given a css id, init Bing maps and attach it to the selector. Opts:
     // beforeInit: a function to run BEFORE maps are initialized. Return false from this function to cancel maps init.
     // afterInit: a function to run AFTER maps are initialized.
+    // severities: an array of non-repeating numbers from 1 to 4 (least to most severe)
+    // defaultOrigin: an array of Lat x Long for the starting point on map load
     // Fires two events: map.beforeInit (before any initialization and user function) and map.afterInit (after map initialize and user function)
     if(opts === undefined) { opts = {}; }
     $.event.trigger({type: 'map.beforeInit', map: this});
     if(this.runUserFn(opts.beforeInit) === false) { return false; }
 
+    if(opts.severities !== undefined) { this.settings.severities = opts.severities; }
+    if(opts.defaultOrigin !== undefined) { this.settings.defaultOrigin = opts.defaultOrigin; }
+
     this.mapOptions = {
       credentials: this.apiKey,
       mapTypeId: Microsoft.Maps.MapTypeId.road,
-      center: new Microsoft.Maps.Location(43.069452, -89.411373),
+      center: new Microsoft.Maps.Location(this.settings.defaultOrigin[0], this.settings.defaultOrigin[1]),
       zoom: 11
     };
 
@@ -95,18 +104,21 @@ var Map = {
       $.event.trigger('map.beforeResolve', {map: this});
 
       var loc = this.pushpin.getLocation();
-      var area = [loc.longitude - 0.001, loc.latitude - 0.001, loc.longitude + 0.001, loc.latitude + 0.001].join(','); // Make a _tiny_ box around the selected point
+      console.debug(loc);
+      var area = [loc.latitude - 0.01, loc.longitude - 0.01, loc.latitude + 0.01, loc.longitude + 0.01].join(','); // Make a _tiny_ box around the selected point
+      console.debug(area);
       var opts = {
         url: 'http://dev.virtualearth.net/REST/v1/Traffic/Incidents/' + area + '?jsonp=?',
         dataType: 'json',
         method: 'GET',
         data: {
-          severity: '2,3,4',
+          severity: this.settings.severities.join(','),
           type: 9,
           key: this.apiKey
         },
         success: function(data) {
-          console.debug(data);
+          console.debug(data.resourceSets[0].resources);
+          // if length > 0 then there are issues and there is traffic
           if(callbacks.success !== undefined) { callbacks.success(data); }
           $.event.trigger('map.afterResolve', {map: this});
         },
@@ -118,9 +130,6 @@ var Map = {
       };
 
       $.ajax(opts);
-      // $.getJSON('http://dev.virtualearth.net/REST/v1/Traffic/Incidents/' + area + '?severity=2,3,4&type=9&key=' + this.apiKey + '&jsonp=?', function(data) {
-      //   console.debug(data);
-      // });
     }
 
     return true;
