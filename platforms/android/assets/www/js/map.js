@@ -1,4 +1,5 @@
 var Map = {
+  apiKey: 'AlOZRqEsj0I5xiQrAM-KFXr1zQEL43FnN8EA5JpsmkltmLP4VH5eXVg15dsDCfr7',
   runUserFn: function(fn) {
     if(fn !== undefined && typeof(fn) === 'function') {
       return fn();
@@ -29,7 +30,7 @@ var Map = {
     if(this.runUserFn(opts.beforeInit) === false) { return false; }
 
     this.mapOptions = {
-      credentials: 'AlOZRqEsj0I5xiQrAM-KFXr1zQEL43FnN8EA5JpsmkltmLP4VH5eXVg15dsDCfr7',
+      credentials: this.apiKey,
       mapTypeId: Microsoft.Maps.MapTypeId.road,
       center: new Microsoft.Maps.Location(43.069452, -89.411373),
       zoom: 11
@@ -85,14 +86,43 @@ var Map = {
     this.map.entities.remove(this.pushpin);
     this.pushpin = undefined;
   },
-  resolveStreetUnderPin: function() {
-    // Grabs a list of all the streets with traffic data under the pin
+  resolveStreetUnderPin: function(callbacks) {
+    if(callbacks === undefined) { callbacks = {}; }
+
     if(this.pushpin === undefined) {
       return false;
     } else {
+      $.event.trigger('map.beforeResolve', {map: this});
+
       var loc = this.pushpin.getLocation();
-      console.debug(loc);
-      return true;
+      var area = [loc.longitude - 0.001, loc.latitude - 0.001, loc.longitude + 0.001, loc.latitude + 0.001].join(','); // Make a _tiny_ box around the selected point
+      var opts = {
+        url: 'http://dev.virtualearth.net/REST/v1/Traffic/Incidents/' + area + '?jsonp=?',
+        dataType: 'json',
+        method: 'GET',
+        data: {
+          severity: '2,3,4',
+          type: 9,
+          key: this.apiKey
+        },
+        success: function(data) {
+          console.debug(data);
+          if(callbacks.success !== undefined) { callbacks.success(data); }
+          $.event.trigger('map.afterResolve', {map: this});
+        },
+        error: function(xhr, status, err) {
+          console.debug('Unable to fetch traffic data:', xhr, status, err);
+          if(callbacks.error !== undefined) { callbacks.error(xhr); }
+          $.event.trigger('map.afterResolve', {map: this});
+        }
+      };
+
+      $.ajax(opts);
+      // $.getJSON('http://dev.virtualearth.net/REST/v1/Traffic/Incidents/' + area + '?severity=2,3,4&type=9&key=' + this.apiKey + '&jsonp=?', function(data) {
+      //   console.debug(data);
+      // });
     }
-  }
+
+    return true;
+  },
 };
