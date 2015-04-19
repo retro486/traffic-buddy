@@ -12,6 +12,13 @@ var Map = {
       Map.searchManager = Map.map.getComponent('searchManager');
     }
   },
+  trafficModuleLoaded: function() {
+    Map.trafficManager = new Microsoft.Maps.Traffic.TrafficManager(Map.map);
+    // show the traffic Layer
+    Map.trafficManager.show();
+    Map.trafficManager.showFlow();
+    Map.trafficManager.showIncidents();
+  },
   init: function(cssId, opts) {
     // Given a css id, init Bing maps and attach it to the selector. Opts:
     // beforeInit: a function to run BEFORE maps are initialized. Return false from this function to cancel maps init.
@@ -30,6 +37,7 @@ var Map = {
 
     this.map = new Microsoft.Maps.Map(document.getElementById(cssId), this.mapOptions);
     Microsoft.Maps.loadModule('Microsoft.Maps.Search', { callback: this.createSearchManager })
+    Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', { callback: this.trafficModuleLoaded });
 
     this.runUserFn(opts.afterInit);
     $.event.trigger({type: 'map.afterInit', map: this});
@@ -46,12 +54,8 @@ var Map = {
       bounds: this.map.getBounds(),
       callback: function(result, userData) {
         if (result) {
-          liveMap.map.entities.clear();
           var topResult = result.results && result.results[0];
           if (topResult) {
-            // TODO look into pushpin for selecting a road...
-            // var pushpin = new Microsoft.Maps.Pushpin(topResult.location, null);
-            // map.entities.push(pushpin);
             liveMap.map.setView({ center: topResult.location, zoom: 13 });
           }
         }
@@ -66,19 +70,29 @@ var Map = {
     this.searchManager.geocode(request);
   },
   showPushPin: function() {
-    this.hidePushPin();
-    var pushpinOptions = {draggable: true};
-    this.pushpin = new Microsoft.Maps.Pushpin(this.map.getCenter(), pushpinOptions);
-    Microsoft.Maps.Events.addHandler(this.pushpin, 'mouseup', function(e) {
-      console.debug(e.target.getLocation());
-    });
-    this.map.entities.push(this.pushpin);
+    if(this.pushpin === undefined) {
+      var pushpinOptions = {draggable: true};
+      this.pushpin = new Microsoft.Maps.Pushpin(this.map.getCenter(), pushpinOptions);
+      // Microsoft.Maps.Events.addHandler(this.pushpin, 'mouseup', function(e) {
+      //   console.debug(e.target.getLocation());
+      // });
+      this.map.entities.push(this.pushpin);
+    }
+
+    this.pushpin.setLocation(this.map.getCenter());
   },
   hidePushPin: function() {
-    this.map.entities.clear();
+    this.map.entities.remove(this.pushpin);
     this.pushpin = undefined;
   },
-  resolveStreetsInView: function() {
-    // Grabs a list of all the streets with traffic data in the current viewport.
+  resolveStreetUnderPin: function() {
+    // Grabs a list of all the streets with traffic data under the pin
+    if(this.pushpin === undefined) {
+      return false;
+    } else {
+      var loc = this.pushpin.getLocation();
+      console.debug(loc);
+      return true;
+    }
   }
 };

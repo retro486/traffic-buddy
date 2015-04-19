@@ -20,9 +20,10 @@ var app = {
     $(document).on('deviceready', this.onDeviceReady);
 
     this.click('#btn-save', function(e) {
-      var bounds = app.map.getBounds();
-      // TODO get streets/traffic within the visible bounds
-      console.debug(bounds);
+      var ret = Map.resolveStreetUnderPin();
+      if(!ret) {
+        console.debug('No pin was set.');
+      }
     });
 
     this.click('#btn-pin', function(e) {
