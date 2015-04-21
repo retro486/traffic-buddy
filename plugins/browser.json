@@ -26,6 +26,9 @@
         },
         "org.apache.cordova.vibration": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.example.hello"
         }
     },
     "dependent_plugins": {

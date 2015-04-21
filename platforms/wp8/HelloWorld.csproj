@@ -226,4 +226,7 @@
     <ItemGroup>
         <Compile Include="Plugins\org.apache.cordova.console\DebugConsole.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\org.apache.cordova.file\File.cs" />
+    </ItemGroup>
 </Project>

@@ -9,6 +9,9 @@
     <feature name="Console">
         <param name="wp-package" value="DebugConsole" />
     </feature>
+    <feature name="File">
+        <param name="wp-package" value="File" />
+    </feature>
     <name>HelloWorld</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

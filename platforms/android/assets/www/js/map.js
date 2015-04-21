@@ -1,8 +1,8 @@
 var Map = {
   apiKey: 'AlOZRqEsj0I5xiQrAM-KFXr1zQEL43FnN8EA5JpsmkltmLP4VH5eXVg15dsDCfr7',
   settings: {
-    severities: [2,3,4],
-    defaultOrigin: [39.443256,-98.957336],
+    severities: [1,2,3,4],
+    defaultOrigin: [37.777119,-122.419640],
   },
   runUserFn: function(fn) {
     if(fn !== undefined && typeof(fn) === 'function') {
@@ -104,22 +104,25 @@ var Map = {
       $.event.trigger('map.beforeResolve', {map: this});
 
       var loc = this.pushpin.getLocation();
-      console.debug(loc);
-      var area = [loc.latitude - 0.01, loc.longitude - 0.01, loc.latitude + 0.01, loc.longitude + 0.01].join(','); // Make a _tiny_ box around the selected point
-      console.debug(area);
+      var area = [loc.latitude - 0.0001, loc.longitude - 0.0001, loc.latitude + 0.0001, loc.longitude + 0.0001]; // Make a _tiny_ box around the selected point
+
+      // DEBUG: preview polygon
+      var polygon = new Microsoft.Maps.Polygon([new Microsoft.Maps.Location(area[0], area[1]), new Microsoft.Maps.Location(area[0], area[3]), new Microsoft.Maps.Location(area[2], area[3]), new Microsoft.Maps.Location(area[2], area[1])], null);
+      this.map.entities.push(polygon);
+
       var opts = {
-        url: 'http://dev.virtualearth.net/REST/v1/Traffic/Incidents/' + area + '?jsonp=?',
+        url: 'http://dev.virtualearth.net/REST/v1/Traffic/Incidents/' + area.join(',') + '?jsonp=?',
         dataType: 'json',
         method: 'GET',
         data: {
-          severity: this.settings.severities.join(','),
-          type: 9,
+          severity: this.settings.severities,
+          type: [1,2,3,4,5,6,7,8,9,10,11], // Almost everything
           key: this.apiKey
         },
         success: function(data) {
-          console.debug(data.resourceSets[0].resources);
+          console.debug(data);
           // if length > 0 then there are issues and there is traffic
-          if(callbacks.success !== undefined) { callbacks.success(data); }
+          if(callbacks.success !== undefined) { callbacks.success(data.resourcesSets[0].resources); }
           $.event.trigger('map.afterResolve', {map: this});
         },
         error: function(xhr, status, err) {

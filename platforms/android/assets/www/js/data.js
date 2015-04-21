@@ -1,0 +1,5 @@
+var Data = {
+  init: function() {
+    
+  }
+};
