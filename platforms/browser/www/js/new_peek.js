@@ -1,10 +1,14 @@
-$(document).on('deviceready', function() {
-  app.click('#btn-save', function(e) {
-    var ret = Map.resolveStreetUnderPin();
-    if(!ret) {
-      console.debug('No pin was set.');
-    }
-  });
+require(["map", "index", "data"],  function(map, index, data) {
+  data.init({errorHandler: function(msg) {
+    $('#error').html(msg).fadeIn();
+  }});
+
+  index.click('#btn-save', function(e) {
+    // TODO
+    var bounds = map.map.getBounds();
+    console.debug(bounds);
+    data.addPeek(data.Peek.init({name: $('#name').val(), bounds: bounds}));
+  }, false);
 
   // this.click('#btn-pin', function(e) {
   //   if(Map.pushpin === undefined) {
@@ -16,8 +20,9 @@ $(document).on('deviceready', function() {
 
   $(document).on('submit', '#map-controls form', function(e) {
     e.preventDefault();
-    Map.goToSearch($('#q').val());
+    map.goToSearch($('#q').val());
   });
 
-  Map.init('map');
+  map.init('map');
+  console.debug('done');
 });

@@ -6,13 +6,83 @@
     position: relative;
     width: 100%;
     height: 100%; }
-  #map-container ul#map-controls {
-    list-style: none;
+
+ul#map-controls {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  ul#map-controls li {
     margin: 0;
-    padding: 0; }
-    #map-container ul#map-controls li {
-      margin: 0;
-      padding: 1em;
-      text-align: center; }
+    padding: 1em;
+    text-align: center; }
+
+@-webkit-keyframes slideopen {
+  0% {
+    height: 3.2em; }
+  50% {
+    height: 5.5em; } }
+@-moz-keyframes slideopen {
+  0% {
+    height: 3.2em; }
+  50% {
+    height: 5.5em; } }
+@-ms-keyframes slideopen {
+  0% {
+    height: 3.2em; }
+  50% {
+    height: 5.5em; } }
+@keyframes slideopen {
+  0% {
+    height: 3.2em; }
+  50% {
+    height: 5.5em; } }
+#btn-save {
+  display: none; }
+
+.faux-btn {
+  position: relative;
+  overflow: hidden;
+  background-color: #dedede;
+  color: #333333;
+  border: none;
+  font-size: 1.5em;
+  padding: 1em 2em;
+  height: 3.2em;
+  display: inline-block;
+  text-decoration: none; }
+
+#btn-save:checked + label.faux-btn {
+  -webkit-animation: slideopen 0.8s;
+  -moz-animation: slideopen 0.8s;
+  -o-animation: slideopen 0.8s;
+  animation: slideopen 0.8s;
+  height: 5.5em; }
+
+.spinner {
+  text-indent: 999em;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 4em;
+  left: 50%;
+  margin: -10px;
+  background-color: #888;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.3) inset;
+  border-radius: 50%; }
+  .spinner:after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 2.66667px;
+    background-color: #fff;
+    height: 4px;
+    width: 4px;
+    animation: spin 1s linear infinite;
+    border-radius: 50%;
+    transform-origin: 7.33333px; }
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg); } }
 
 /*# sourceMappingURL=new_peek.css.map */

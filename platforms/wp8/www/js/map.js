@@ -1,4 +1,4 @@
-var Map = {
+define(function() { var self = {
   apiKey: 'AlOZRqEsj0I5xiQrAM-KFXr1zQEL43FnN8EA5JpsmkltmLP4VH5eXVg15dsDCfr7',
   settings: {
     severities: [1,2,3,4],
@@ -12,56 +12,57 @@ var Map = {
     }
   },
   createSearchManager: function() {
-    if (!Map.searchManager) {
-      Map.map.addComponent('searchManager', new Microsoft.Maps.Search.SearchManager(Map.map));
-      Map.searchManager = Map.map.getComponent('searchManager');
+    if (!self.searchManager) {
+      self.map.addComponent('searchManager', new Microsoft.Maps.Search.SearchManager(self.map));
+      self.searchManager = self.map.getComponent('searchManager');
     }
   },
   trafficModuleLoaded: function() {
-    Map.trafficManager = new Microsoft.Maps.Traffic.TrafficManager(Map.map);
+    self.trafficManager = new Microsoft.Maps.Traffic.TrafficManager(self.map);
     // show the traffic Layer
-    Map.trafficManager.show();
-    Map.trafficManager.showFlow();
-    Map.trafficManager.showIncidents();
+    self.trafficManager.show();
+    self.trafficManager.showFlow();
+    self.trafficManager.showIncidents();
   },
   init: function(cssId, opts) {
     // Given a css id, init Bing maps and attach it to the selector. Opts:
-    // beforeInit: a function to run BEFORE maps are initialized. Return false from this function to cancel maps init.
+    // beforeInit: a function to run BEFORE maps are initialized. Return false from self function to cancel maps init.
     // afterInit: a function to run AFTER maps are initialized.
     // severities: an array of non-repeating numbers from 1 to 4 (least to most severe)
     // defaultOrigin: an array of Lat x Long for the starting point on map load
     // Fires two events: map.beforeInit (before any initialization and user function) and map.afterInit (after map initialize and user function)
     if(opts === undefined) { opts = {}; }
-    $.event.trigger({type: 'map.beforeInit', map: this});
-    if(this.runUserFn(opts.beforeInit) === false) { return false; }
 
-    if(opts.severities !== undefined) { this.settings.severities = opts.severities; }
-    if(opts.defaultOrigin !== undefined) { this.settings.defaultOrigin = opts.defaultOrigin; }
+    $.event.trigger({type: 'map.beforeInit', map: self});
+    if(self.runUserFn(opts.beforeInit) === false) { return false; }
 
-    this.mapOptions = {
-      credentials: this.apiKey,
+    if(opts.severities !== undefined) { self.settings.severities = opts.severities; }
+    if(opts.defaultOrigin !== undefined) { self.settings.defaultOrigin = opts.defaultOrigin; }
+
+    self.mapOptions = {
+      credentials: self.apiKey,
       mapTypeId: Microsoft.Maps.MapTypeId.road,
-      center: new Microsoft.Maps.Location(this.settings.defaultOrigin[0], this.settings.defaultOrigin[1]),
+      center: new Microsoft.Maps.Location(self.settings.defaultOrigin[0], self.settings.defaultOrigin[1]),
       zoom: 11
     };
 
-    this.map = new Microsoft.Maps.Map(document.getElementById(cssId), this.mapOptions);
-    Microsoft.Maps.loadModule('Microsoft.Maps.Search', { callback: this.createSearchManager })
-    Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', { callback: this.trafficModuleLoaded });
+    self.map = new Microsoft.Maps.Map(document.getElementById(cssId), self.mapOptions);
+    Microsoft.Maps.loadModule('Microsoft.Maps.Search', { callback: self.createSearchManager })
+    Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', { callback: self.trafficModuleLoaded });
 
-    this.runUserFn(opts.afterInit);
-    $.event.trigger({type: 'map.afterInit', map: this});
-    return this;
+    self.runUserFn(opts.afterInit);
+    $.event.trigger({type: 'map.afterInit', map: self});
+    return self;
   },
   goToSearch: function(searchString) {
     // Given an arbitrary search value (county, street address, city, etc) snap the current viewport to it, retaining zoom. Might want to reset zoom...
-    $.event.trigger({type: 'map.beforeSearch', map: this});
+    $.event.trigger({type: 'map.beforeSearch', map: self});
 
-    var liveMap = this;
+    var liveMap = self;
     var request = {
       where: searchString,
       count: 5,
-      bounds: this.map.getBounds(),
+      bounds: self.map.getBounds(),
       callback: function(result, userData) {
         if (result) {
           var topResult = result.results && result.results[0];
@@ -76,59 +77,58 @@ var Map = {
       },
       userData: { name: 'Maps Test User', id: 'XYZ' }
     };
-    this.hidePushPin();
-    this.searchManager.geocode(request);
+    self.hidePushPin();
+    self.searchManager.geocode(request);
   },
   showPushPin: function() {
-    if(this.pushpin === undefined) {
+    if(self.pushpin === undefined) {
       var pushpinOptions = {draggable: true};
-      this.pushpin = new Microsoft.Maps.Pushpin(this.map.getCenter(), pushpinOptions);
-      // Microsoft.Maps.Events.addHandler(this.pushpin, 'mouseup', function(e) {
+      self.pushpin = new Microsoft.Maps.Pushpin(self.map.getCenter(), pushpinOptions);
+      // Microsoft.Maps.Events.addHandler(self.pushpin, 'mouseup', function(e) {
       //   console.debug(e.target.getLocation());
       // });
-      this.map.entities.push(this.pushpin);
+      self.map.entities.push(self.pushpin);
     }
 
-    this.pushpin.setLocation(this.map.getCenter());
+    self.pushpin.setLocation(self.map.getCenter());
   },
   hidePushPin: function() {
-    this.map.entities.remove(this.pushpin);
-    this.pushpin = undefined;
+    self.map.entities.remove(self.pushpin);
+    self.pushpin = undefined;
   },
   resolveStreetUnderPin: function(callbacks) {
     if(callbacks === undefined) { callbacks = {}; }
 
-    if(this.pushpin === undefined) {
+    if(self.pushpin === undefined) {
       return false;
     } else {
-      $.event.trigger('map.beforeResolve', {map: this});
+      $.event.trigger('map.beforeResolve', {map: self});
 
-      var loc = this.pushpin.getLocation();
+      var loc = self.pushpin.getLocation();
       var area = [loc.latitude - 0.0001, loc.longitude - 0.0001, loc.latitude + 0.0001, loc.longitude + 0.0001]; // Make a _tiny_ box around the selected point
 
       // DEBUG: preview polygon
       var polygon = new Microsoft.Maps.Polygon([new Microsoft.Maps.Location(area[0], area[1]), new Microsoft.Maps.Location(area[0], area[3]), new Microsoft.Maps.Location(area[2], area[3]), new Microsoft.Maps.Location(area[2], area[1])], null);
-      this.map.entities.push(polygon);
+      self.map.entities.push(polygon);
 
       var opts = {
         url: 'http://dev.virtualearth.net/REST/v1/Traffic/Incidents/' + area.join(',') + '?jsonp=?',
         dataType: 'json',
         method: 'GET',
         data: {
-          severity: this.settings.severities,
+          severity: self.settings.severities,
           type: [1,2,3,4,5,6,7,8,9,10,11], // Almost everything
-          key: this.apiKey
+          key: self.apiKey
         },
         success: function(data) {
-          console.debug(data);
           // if length > 0 then there are issues and there is traffic
           if(callbacks.success !== undefined) { callbacks.success(data.resourcesSets[0].resources); }
-          $.event.trigger('map.afterResolve', {map: this});
+          $.event.trigger('map.afterResolve', {map: self});
         },
         error: function(xhr, status, err) {
           console.debug('Unable to fetch traffic data:', xhr, status, err);
           if(callbacks.error !== undefined) { callbacks.error(xhr); }
-          $.event.trigger('map.afterResolve', {map: this});
+          $.event.trigger('map.afterResolve', {map: self});
         }
       };
 
@@ -137,4 +137,4 @@ var Map = {
 
     return true;
   },
-};
+}; return self;}());

@@ -1,4 +1,4 @@
-var app = {
+define({
   click: function(selector, fn, preventDefault) {
     if(preventDefault === undefined) { preventDefault = true; }
     $(document).on('click touchstart', selector, function(e) {
@@ -9,5 +9,5 @@ var app = {
         return false;
       }
     });
-  },
-};
+  }
+});
