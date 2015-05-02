@@ -1,4 +1,4 @@
-require(["map", "main", "data"],  function(map, index, data) {
+require(["map", "main", "data"],  function(map, main, data) {
   data.init();
 
   main.click('#btn-save', function(e) {

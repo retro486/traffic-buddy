@@ -34,6 +34,18 @@ body {
     border-right: 1px solid #cccccc; }
     .app ul#nav li:last-child {
       border-right: none; }
+.app #peek-map-container {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .app #peek-map-container li {
+    padding: 0 0 24px 0; }
+    .app #peek-map-container li div {
+      width: 300px;
+      height: 300px; }
+    .app #peek-map-container li label {
+      display: block;
+      font-weight: normal; }
 
 /* Landscape layout (with min-width) */
 h1 {
