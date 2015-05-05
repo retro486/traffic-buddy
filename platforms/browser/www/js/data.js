@@ -14,5 +14,10 @@ define(function() { var self = {
   },
   getPeeks: function() {
     return self.peeks;
+  },
+  deletePeek: function(name) {
+    self.peeks = self.peeks.filter(function(e) { return e.name !== name; });
+    self.save();
+    return self.peeks;
   }
 }; return self;}());
