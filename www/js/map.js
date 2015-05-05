@@ -1,5 +1,5 @@
 define(function() { var self = {
-  apiKey: 'AlOZRqEsj0I5xiQrAM-KFXr1zQEL43FnN8EA5JpsmkltmLP4VH5eXVg15dsDCfr7',
+  apiKey: '',
   settings: {
     severities: [1,2,3,4],
     defaultOrigin: [37.777119,-122.419640],
