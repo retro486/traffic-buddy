@@ -34,7 +34,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 
 
-namespace com.example.hello
+namespace us.rdkl.trafficbuddy
 {
     public partial class MainPage : PhoneApplicationPage
     {

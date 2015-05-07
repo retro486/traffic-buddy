@@ -53,7 +53,7 @@ namespace WPCordovaClassLib {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/com.example.hello;component/cordovalib/CordovaView.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/us.rdkl.trafficbuddy;component/cordovalib/CordovaView.xaml", System.UriKind.Relative));
             this.LayoutRoot = ((System.Windows.Controls.Grid)(this.FindName("LayoutRoot")));
             this.CordovaBrowser = ((Microsoft.Phone.Controls.WebBrowser)(this.FindName("CordovaBrowser")));
             this.FadeIn = ((System.Windows.Media.Animation.Storyboard)(this.FindName("FadeIn")));

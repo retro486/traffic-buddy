@@ -12,31 +12,35 @@
   </head>
   <body>
     <div class='app'>
-      <ul id='nav'>
-        <li>
-          <a class='btn btn-default' href='index.html'>
-            <i class='glyphicon glyphicon-chevron-left'></i>
-          </a>
-        </li>
-      </ul>
-      <h1>New Traffic Peek</h1>
-      <div id='map-container'>
-        <div id='map'></div>
+      <div id='nav'>
+        <h1>Add Peek</h1>
+        <a class='btn-back' href='index.html'>
+          <i class='glyphicon glyphicon-chevron-left'></i>
+          Back
+        </a>
+        <a href='#' id='btn-save'>Save</a>
+      </div>
+      <div id='peek-map-container'>
+        <div class='map-container' id='map-container'>
+          <div class='map' id='map'></div>
+        </div>
       </div>
       <ul id='map-controls'>
         <li>
           <form>
-            <input class='form-control' id='q' placeholder='Search' type='text'>
+            <div class='form-group'>
+              <div class='input-group'>
+                <input class='form-control' id='q' placeholder='Search' type='text'>
+                <div class='input-group-addon'>
+                  <i class='glyphicon glyphicon-search'></i>
+                </div>
+              </div>
+            </div>
           </form>
         </li>
         <li>
           <div class='alert alert-danger' id='error' style='display:none; width: 75%; margin: 1em auto;'></div>
           <input class='form-control' id='name' placeholder='Nickname' type='text'>
-          <input id='btn-save' type='checkbox'>
-          <label class='faux-btn' for='btn-save'>
-            Save
-            <div class='spinner'></div>
-          </label>
         </li>
       </ul>
     </div>

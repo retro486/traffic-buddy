@@ -15,6 +15,11 @@ require(["map", "main", "data"],  function(map, main, data) {
     map2.goToSearch($('#q').val());
   });
 
+  $(document).on('click', '#q + .input-group-addon', function(e) {
+    e.preventDefault();
+    $('#map-controls form').submit();
+  });
+
   map2.init('map', {
     afterInit: function() {
       map2.attachSearch();

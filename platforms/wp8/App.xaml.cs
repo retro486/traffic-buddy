@@ -32,7 +32,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace com.example.hello
+namespace us.rdkl.trafficbuddy
 {
     public partial class App : Application
     {

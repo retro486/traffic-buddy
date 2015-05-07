@@ -11,20 +11,21 @@
   </head>
   <body>
     <div class='app'>
-      <ul id='nav'>
-        <li>
-          <a class='btn btn-default' href='new_peek.html'>
-            <i class='glyphicon glyphicon-plus'></i>
-          </a>
-        </li>
-      </ul>
+      <div id='nav'>
+        <h1>Traffic Buddy</h1>
+        <a href='new_peek.html' id='btn-new-peek'>
+          <i class='glyphicon glyphicon-plus'></i>
+        </a>
+      </div>
       <div id='peek-map-container'>
         <div class='map-container'>
           <div class='map'></div>
-          <label></label>
-          <button class='btn btn-default btn-delete'>
-            <i class='glyphicon glyphicon-remove'></i>
-          </button>
+          <div class='label-bar'>
+            <label></label>
+            <a class='btn-delete' href='#'>
+              <i class='glyphicon glyphicon-trash'></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>

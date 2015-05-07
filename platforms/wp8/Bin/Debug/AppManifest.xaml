@@ -11,8 +11,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="com.example.hello" EntryPointType="com.example.hello.App" RuntimeVersion="4.7.50308.0">
+<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="us.rdkl.trafficbuddy" EntryPointType="us.rdkl.trafficbuddy.App" RuntimeVersion="4.7.50308.0">
   <Deployment.Parts>
-    <AssemblyPart x:Name="com.example.hello" Source="com.example.hello.dll" />
+    <AssemblyPart x:Name="us.rdkl.trafficbuddy" Source="us.rdkl.trafficbuddy.dll" />
   </Deployment.Parts>
 </Deployment>
