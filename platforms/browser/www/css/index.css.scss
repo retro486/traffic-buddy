@@ -18,105 +18,170 @@ body {
     height:100%;
     margin:0px;
     padding:0;
-    width: auto;
 }
 
 /* Portrait layout (default) */
-.app {
-  padding-top: 6em;
+#slide-wrapper {
+  width: 100%;
+  overflow-x: hidden;
 
-  .clear { clear: both; }
-
-  #nav {
-    padding: 1em;
-    background-color: #ffffff;
-    position: fixed;
+  #app {
+    width: 200%;
+    max-width: 200%;
+    position: relative;
     left: 0;
-    top: 0;
-    right: 0;
-    z-index: 100;
 
-    h1 {
-      text-align: center;
+    #index, #new-peek {
+      float: left;
+      width: 50%;
+      position: relative;
+      padding-top: 6em;
+      overflow: hidden;
     }
 
-    a {
-      color: $blue;
-      font-size: 2em;
-      position: absolute;
-      top: 0.3em;
+    .clear { clear: both; }
 
-      &:hover, &:active {
-        text-decoration: none;
+    .nav {
+      padding: 1em;
+      background-color: #ffffff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      z-index: 100;
+
+      h1 {
+        text-align: center;
+      }
+
+      a {
+        color: $blue;
+        font-size: 2em;
+        position: absolute;
+        top: 0.3em;
+
+        &:hover, &:active {
+          text-decoration: none;
+        }
+      }
+
+      #btn-new-peek, #btn-save {
+        right: .5em;
+      }
+
+      .glyphicon {
+        top: 2px;
+      }
+
+      #btn-back {
+        left: .5em;
       }
     }
 
-    #btn-new-peek, #btn-save {
-      right: .5em;
+    #peek-template {
+      display: none;
     }
 
-    .glyphicon {
-      top: 2px;
+    #no-peeks {
+      color: #adadad;
+      font-size: 2em;
+      text-align: center;
+      padding-top: 6em;
+      text-shadow: 1px 1px #111111;
     }
-  }
 
-  #peek-map-container {
-    .map-container {
-      padding: 0;
-      position: relative;
-      margin: 0 auto 2em auto;
-      width: 30em;
-      height: 30em;
-
-      .map {
+    .peek-map-container {
+      .map-container {
+        padding: 0;
         position: relative;
-        width: 100%;
-        height: 100%;
+        margin: 0 auto 2em auto;
 
-        .MicrosoftMap {
-          border-radius: 1em;
+        // Responsive square hack
+        width: 80%;
+        height: 0;
+        padding-bottom: 80%;
 
-          .TrafficLegend, .OverlaysTL {
-            display: none;
+        .map {
+          position: absolute;;
+          width: 100%;
+          height: 100%;
+
+          .MicrosoftMap {
+            border-radius: 1em;
+
+            .TrafficLegend, .OverlaysTL {
+              display: none;
+            }
+          }
+        }
+
+        .label-bar {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 6em;
+          background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
+          background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+
+          label {
+            display: block;
+            font-weight: normal;
+            text-align: left;
+            font-size: 2em;
+            position: absolute;
+            bottom: .25em;
+            left: .5em;
+            color: #ffffff;
+            overflow: hidden;
+            height: 1.3em;
+            max-width: 80%;
+          }
+
+          .btn-delete {
+            color: #ffffff;
+            position: absolute;
+            bottom: .25em;
+            right: .5em;
+            font-size: 2em;
           }
         }
       }
+    }
 
-      .label-bar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 6em;
-        background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+    ul#map-controls {
+      list-style: none;
+      margin: 0;
+      padding: 0;
 
+      li {
+        margin: 0;
+        padding: 1em 2em;
+        text-align: center;
 
-        label {
-          display: block;
-          font-weight: normal;
-          text-align: left;
-          font-size: 2em;
-          position: absolute;
-          bottom: .25em;
-          left: .5em;
-          color: #ffffff;
-          overflow: hidden;
-          height: 1.3em;
-          max-width: 80%;
+        .form-control {
+          font-size: 1.5em;
+          padding: 0.5em;
+          height: auto;
+          border-radius: 0.5em;
         }
 
-        .btn-delete {
-          color: #ffffff;
-          position: absolute;
-          bottom: .25em;
-          right: .5em;
-          font-size: 2em;
+        .input-group {
+          .form-control:first-child {
+            border-radius: 0.5em 0 0 0.5em;
+          }
+
+          .input-group-addon {
+            font-size: 1.5em;
+            padding: 0.5em 1em;
+            border-radius: 0 0.5em 0.5em 0;
+          }
         }
       }
     }

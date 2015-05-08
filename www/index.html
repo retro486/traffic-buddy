@@ -10,22 +10,60 @@
     <title>Traffic Buddy</title>
   </head>
   <body>
-    <div class='app'>
-      <div id='nav'>
-        <h1>Traffic Buddy</h1>
-        <a href='new_peek.html' id='btn-new-peek'>
-          <i class='glyphicon glyphicon-plus'></i>
-        </a>
-      </div>
-      <div id='peek-map-container'>
-        <div class='map-container'>
-          <div class='map'></div>
-          <div class='label-bar'>
-            <label></label>
-            <a class='btn-delete' href='#'>
-              <i class='glyphicon glyphicon-trash'></i>
+    <div id='slide-wrapper'>
+      <div id='app'>
+        <div id='index'>
+          <div class='nav'>
+            <h1>Traffic Buddy</h1>
+            <a href='#' id='btn-new-peek'>
+              <i class='glyphicon glyphicon-plus'></i>
             </a>
           </div>
+          <div id='peek-template'>
+            <div class='map-container'>
+              <div class='map'></div>
+              <div class='label-bar'>
+                <label></label>
+                <a class='btn-delete' href='#'>
+                  <i class='glyphicon glyphicon-trash'></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class='peek-map-container'></div>
+        </div>
+        <div id='new-peek'>
+          <div class='nav'>
+            <h1>Add Peek</h1>
+            <a href='#' id='btn-back'>
+              <i class='glyphicon glyphicon-chevron-left'></i>
+              Back
+            </a>
+            <a href='#' id='btn-save'>Save</a>
+          </div>
+          <div class='peek-map-container'>
+            <div class='map-container' id='map-container'>
+              <div class='map' id='map'></div>
+            </div>
+          </div>
+          <ul id='map-controls'>
+            <li>
+              <form>
+                <div class='form-group'>
+                  <div class='input-group'>
+                    <input class='form-control' id='q' placeholder='Search' type='text'>
+                    <div class='input-group-addon'>
+                      <i class='glyphicon glyphicon-search'></i>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </li>
+            <li>
+              <div class='alert alert-danger' id='error' style='display:none; width: 75%; margin: 1em auto;'></div>
+              <input class='form-control' id='name' placeholder='Nickname' type='text'>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
