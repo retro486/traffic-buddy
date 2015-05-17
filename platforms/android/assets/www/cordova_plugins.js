@@ -179,6 +179,13 @@ module.exports = [
         "runs": true
     },
     {
+        "file": "plugins/com.google.cordova.admob/www/AdMob.js",
+        "id": "com.google.cordova.admob.AdMob",
+        "clobbers": [
+            "window.AdMob"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.device/www/device.js",
         "id": "org.apache.cordova.device.device",
         "clobbers": [
@@ -193,7 +200,10 @@ module.exports.metadata =
     "org.apache.cordova.vibration": "0.3.13",
     "org.apache.cordova.console": "0.2.13",
     "org.apache.cordova.file": "1.3.3",
-    "org.apache.cordova.device": "0.3.0"
+    "com.google.cordova.admob": "2.7.7",
+    "org.apache.cordova.device": "0.3.0",
+    "com.google.playservices": "19.0.0",
+    "com.rjfun.cordova.extension": "1.1.0"
 }
 // BOTTOM OF METADATA
 });

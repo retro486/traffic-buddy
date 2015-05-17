@@ -1,0 +1,28 @@
+{
+    "version": "3.23.1",
+    "name": "com.rjfun.cordova.facebookads",
+    "cordova_name": "FacebookAds",
+    "description": "Cordova/PhoneGap Plugin for Facebook Audience Network Ads",
+    "license": "MIT",
+    "repo": "https://github.com/floatinghotpot/cordova-plugin-facebookads.git",
+    "issue": "https://github.com/floatinghotpot/cordova-plugin-facebookads/issues",
+    "keywords": [
+        "rjfun",
+        "ad",
+        "admob",
+        "iad",
+        "mopub",
+        "facebook",
+        "audience"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0"
+        }
+    ]
+}

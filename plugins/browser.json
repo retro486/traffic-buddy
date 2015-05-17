@@ -29,11 +29,17 @@
         },
         "org.apache.cordova.file": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "com.google.cordova.admob": {
+            "PACKAGE_NAME": "us.rdkl.trafficbuddy"
         }
     },
     "dependent_plugins": {
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "com.rjfun.cordova.extension": {
+            "PACKAGE_NAME": "us.rdkl.trafficbuddy"
         }
     }
 }

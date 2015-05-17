@@ -14,6 +14,10 @@
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="AdMob">
+        <param name="android-package" value="com.rjfun.cordova.admob.AdMobPlugin" />
+        <param name="onload" value="true" />
+    </feature>
     <name>Traffic Buddy</name>
     <description>
         A quick traffic spotter that doesn't use GPS.

@@ -229,4 +229,15 @@
     <ItemGroup>
         <Compile Include="Plugins\org.apache.cordova.file\File.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.google.cordova.admob\AdMobPlugin.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.google.cordova.admob\AdMobOptions.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="GoogleAds">
+            <HintPath>plugins\com.google.cordova.admob\GoogleAds.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 </Project>

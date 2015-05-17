@@ -1,5 +1,6 @@
-require(["map", "main", "data"],  function(map, main, data) {
+require(["map", "main", "data", "ads"],  function(map, main, data, ads) {
   data.init();
+  ads.init();
 
   var reloadPeeks = function() {
     var peeks = data.getPeeks();
@@ -55,9 +56,16 @@ require(["map", "main", "data"],  function(map, main, data) {
     $('#btn-back').click();
   });
 
-  $(document).on('submit', '#map-controls form', function(e) {
+  $(document).on('submit', '#search-form', function(e) {
     e.preventDefault();
     newPeekMap.goToSearch($('#q').val());
+    $('input').trigger('blur');
+  });
+
+  $(document).on('submit', '#new-form', function(e) {
+    e.preventDefault();
+    $('input').trigger('blur');
+    $('#btn-save').click();
   });
 
   main.click('#q + .input-group-addon', function(e) {
@@ -72,16 +80,10 @@ require(["map", "main", "data"],  function(map, main, data) {
   });
 
   main.click('#btn-new-peek', function(e) {
-    $('#new-peek').css('height', 'auto');
-    $('#app').animate({left: '-100%'}, function() {
-      $('#index').css('height', $('#new-peek').outerHeight() + 'px');
-    });
+    $('#app').css('height', $('#new-peek').outerHeight() + 'px').removeClass('showIndex').addClass('showNewPeek');
   });
 
   main.click('#btn-back', function(e) {
-    $('#index').css('height', 'auto');
-    $('#app').animate({left: 0}, function() {
-      $('#new-peek').css('height', $('#index').outerHeight() + 'px');
-    });
+    $('#app').css('height', $('#index').outerHeight() + 'px').removeClass('showNewPeek').addClass('showIndex');
   });
 });

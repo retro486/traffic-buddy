@@ -29,5 +29,61 @@
             "type": "registry",
             "id": "org.apache.cordova.file"
         }
+    },
+    "com.google.admobsdk": {
+        "source": {
+            "type": "registry",
+            "id": "com.google.admobsdk"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "com.google.playservices": {
+        "source": {
+            "type": "registry",
+            "id": "com.google.playservices@19.0.0"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "com.google.cordova.admob": {
+        "source": {
+            "type": "registry",
+            "id": "com.google.cordova.admob"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.rjfun.cordova.extension": {
+        "source": {
+            "type": "registry",
+            "id": "com.rjfun.cordova.extension"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "com.google.cordova.admob-facebook": {
+        "source": {
+            "type": "registry",
+            "id": "com.google.cordova.admob-facebook"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.rjfun.cordova.facebookads": {
+        "source": {
+            "type": "registry",
+            "id": "com.rjfun.cordova.facebookads"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "android.support.v4": {
+        "source": {
+            "type": "registry",
+            "id": "android.support.v4"
+        },
+        "is_top_level": false,
+        "variables": {}
     }
 }

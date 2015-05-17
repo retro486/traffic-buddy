@@ -2,3 +2,7 @@
 *.swp
 www/css/*.map
 apikey.js
+ads.js
+*.apk
+platforms/wp8/Bin/*
+platforms/wp8/obj/*

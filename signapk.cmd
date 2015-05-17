@@ -1,0 +1,1 @@
+jarsigner -verbose -sigalt SHA1withRSA -digestalg SHA1 -keystore c:\Users\Russell\androidkeystore.jks MainActivity-release-unsigned.apk trafficbuddy

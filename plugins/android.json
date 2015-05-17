@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"AdMob\"><param name=\"android-package\" value=\"com.rjfun.cordova.admob.AdMobPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -57,6 +61,14 @@
                         {
                             "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.notification.ClickActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" android:theme=\"@android:style/Theme.Translucent\" />",
+                            "count": 1
                         }
                     ],
                     "/manifest": [
@@ -77,6 +89,14 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -95,11 +115,20 @@
         },
         "org.apache.cordova.file": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "com.google.cordova.admob": {
+            "PACKAGE_NAME": "us.rdkl.trafficbuddy"
         }
     },
     "dependent_plugins": {
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.example.hello"
+        },
+        "com.google.playservices": {
+            "PACKAGE_NAME": "us.rdkl.trafficbuddy"
+        },
+        "com.rjfun.cordova.extension": {
+            "PACKAGE_NAME": "us.rdkl.trafficbuddy"
         }
     }
 }
