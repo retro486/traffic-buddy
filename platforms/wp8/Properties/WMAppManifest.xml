@@ -4,7 +4,7 @@
     <Languages xmlns="">
         <Language code="en-US" />
     </Languages>
-    <App Author="Russell Bernhardt" BitsPerPixel="32" Description="Traffic Buddy for Windows Phone" Genre="apps.normal" ProductID="{b4b069f0-e650-11e4-a074-49447142a77a}" Publisher="Rdkl.us" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Traffic Buddy" Version="1.0.0" xmlns="">
+    <App Author="Traffic Spotter Author" BitsPerPixel="32" Description="Traffic Spotter for Windows Phone" Genre="apps.normal" ProductID="{b4b069f0-e650-11e4-a074-49447142a77a}" Publisher="Traffic Spotter Publisher" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="Traffic Spotter" Version="1.1.0" xmlns="">
         <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
         <Capabilities>
             <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
@@ -16,12 +16,12 @@
             <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
         </Tasks>
         <Tokens>
-            <PrimaryToken TaskName="_default" TokenID="Traffic Buddy">
+            <PrimaryToken TaskName="_default" TokenID="Traffic Spotter">
                 <TemplateFlip>
                     <SmallImageURI IsRelative="true" IsResource="false">Background.png</SmallImageURI>
                     <Count>0</Count>
                     <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
-                    <Title>Traffic Buddy</Title>
+                    <Title>Traffic Spotter</Title>
                     <BackContent />
                     <BackBackgroundImageURI />
                     <BackTitle />

@@ -1,2 +1,2 @@
 call precompile
-cordova run android
+cordova run android --emulator

@@ -7,19 +7,20 @@
     / WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323
     %meta{:content => "user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi", :name => "viewport"}/
     %link{:href => "css/index.css", :rel => "stylesheet", :type => "text/css"}/
-    %title Traffic Buddy
+    %title Traffic Spotter
   %body
     #slide-wrapper
       #app
         #index
           .nav
-            %h1 Traffic Buddy
+            %h1 Traffic Spotter
             %a#btn-new-peek{:href => "#"}
               %i.glyphicon.glyphicon-plus
 
           #peek-template
             .map-container
               .map
+              .clear
               .label-bar
                 %label
                 %a.btn-delete{href: '#'}
@@ -28,7 +29,7 @@
 
         #new-peek
           .nav
-            %h1 Add Peek
+            %h1 New Spot
             %a#btn-back{:href => "#"}
               %i.glyphicon.glyphicon-chevron-left
               Back

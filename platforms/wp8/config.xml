@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="us.rdkl.trafficbuddy" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="us.rdkl.trafficbuddy" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Device">
         <param name="wp-package" value="Device" />
     </feature>
@@ -15,7 +15,7 @@
     <feature name="AdMob">
         <param name="wp-package" value="AdMobPlugin" />
     </feature>
-    <name>Traffic Buddy</name>
+    <name>Traffic Spotter</name>
     <description>
         A quick traffic spotter that doesn't use GPS.
     </description>
